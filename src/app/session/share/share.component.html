@@ -1,0 +1,26 @@
+<button mat-icon-button class="bb" (click)="close()"><mat-icon>arrow_back_ios_new</mat-icon></button>
+<div class="toolbar">
+  Share
+</div>
+<div class="title">Invite others to the game!</div>
+<div class="info">scan the code:</div>
+<div class="qr">
+  <qrcode-svg
+  class="qr"
+  color="#003452"
+  [value]="SessionUrl"
+  [margin]="'2'"
+  ></qrcode-svg>
+</div>
+<div class="space"></div>
+<div class="info">..or text a link</div>
+<div class="share-code">
+  <div style="flex:1; text-align: center;">{{session?.shareCode}}</div>
+  <button mat-icon-button color="primary" (click)="share()"><mat-icon>share</mat-icon></button>
+</div>
+<div class="title">Players Joined ({{users.length || 0}})</div>
+<div class="users">
+  <div class="user" *ngFor="let user of users">
+    {{user.name}}
+  </div>
+</div>

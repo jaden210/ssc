@@ -1,0 +1,82 @@
+<ng-container class="window" [ngSwitch]="view">
+  <div class="center mid" *ngSwitchCase="'splash'" @fadeIn>
+    <img class="mi" src="./assets/ssc.png">
+    <div class="title">The best way to get out together</div>
+  </div>
+  <div class="center mid" *ngSwitchCase="'start'" @fadeIn>
+    <img class="mi" src="./assets/decide.jpeg">
+    <div class="title">You've been invited by {{sessionUser?.name}} to decide where to go</div>
+    <div class="info">Playing is simple.<br><br> Enter some information,<br> swipe right on places you want to go,<br> share with others who are going,<br> and see the results!</div>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" (click)="start()">Let's do it!</button>
+  </div>
+  <div class="center mid" *ngSwitchCase="'over'" @fadeIn>
+    <img class="mi" src="./assets/dog.jpeg">
+    <div class="title">This game has expired!</div>
+    <div class="info">Click below to start a new one.</div>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" routerLink="/start">Start a game</button>
+  </div>
+  <div class="center mid" *ngSwitchCase="'bad'" @fadeIn>
+    <img class="mi" src="./assets/dog.jpeg">
+    <div class="title">We couldn't find the game you're looking for..</div>
+    <div class="info">
+      Click below to start a new one, or ask for a new link.<br><br>
+      You can also join by a 4 digit code by clicking the button below then hitting "I have a Join Code"
+    </div>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" routerLink="/start">Start a game</button>
+  </div>
+  <div class="center mid" *ngSwitchCase="'name'" @fadeIn>
+    <img class="mi" src="./assets/person.jpeg">
+    <div class="title">Who are you?</div>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="name" name="name" id="name" [(ngModel)]="user.name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="phone number" name="phoneNumber" id="phone" type="tel" [(ngModel)]="user.phone">
+    </mat-form-field>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" [disabled]="!user.name || !user.phone" (click)="createUserAndJoinGame()">Start swiping</button>
+  </div>
+  <div class="center"  *ngSwitchCase="'game'" @fadeIn>
+    <div class="window" *ngIf="filteredPlaces?.length > 0; else empty">
+      <div class="card" *ngFor="let place of filteredPlaces; let i = index" cdkDrag (cdkDragMoved)="rotate($event, i)" (cdkDragStarted)="dragStart($event, i)" (cdkDragEnded)="drop($event, i, place)" [cdkDragFreeDragPosition]="dragPosition">
+          <div [id]="'card' + i" class="inner-card mat-elevation-z2">
+            <img class="ci" [src]="place.logoUrl" onerror="src = './assets/store.jpeg'">
+            <div class="cont">
+              <div class="name">{{place.name}}</div>
+              <ng-container *ngFor="let deal of place.deals; let ind = index">
+                <div class="deal" *ngIf="ind < 2">{{deal.name}}</div>
+              </ng-container>
+              <!-- <div class="deal" *ngIf="place.deals.length > 2">+ {{place.deals.length - 2}} more!</div> -->
+            </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="showMatchCard" cdkDrag @swipe (cdkDragMoved)="rotate($event, 6969)" (cdkDragStarted)="dragStart($event, 6969)" (cdkDragEnded)="drop($event, 6969, null)" [cdkDragFreeDragPosition]="dragPosition">
+          <div [id]="'card6969'" class="inner-card mat-elevation-z2">
+            <img class="ci" src="./assets/match.jpeg">
+            <div class="cont">
+              <div class="name">You've made a match!</div>
+              <div class="deal">Swipe right, or click on your dashboard to see the match</div>
+              <div class="deal">If you are an option lover, keep swiping to get more matches</div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="action-bar" *ngIf="filteredPlaces?.length > 0">
+      <button mat-stroked-button class="mini" (click)="dashboard()" matBadgeColor="accent" [matBadge]="Matches" [matBadgeHidden]="Matches == 0"><mat-icon>dashboard</mat-icon></button>
+      <button mat-fab class="big ro" [class.red]="tu == false" (click)="swipePlace(false)"><mat-icon>thumb_down</mat-icon></button>
+      <button mat-fab class="big go" [class.green]="tu" (click)="swipePlace(true)"><mat-icon>thumb_up</mat-icon></button>
+      <button mat-stroked-button class="mini" (click)="share()" matBadgeColor="primary" [matBadge]="session?.users?.length || 0"><mat-icon>share</mat-icon></button>
+    </div>
+    <ng-template #empty>
+      <div class="window mid">
+        <div class="title">That's all the suggestions we have!<br> Check out your matches.</div>
+        <button mat-raised-button color="primary" class="w-b" (click)="dashboard()">See Results</button>
+        <button mat-stroked-button color="primary" class="w-b" (click)="share()">Invite More People</button>
+        <button mat-stroked-button color="primary" class="w-b" (click)="expand()">Expand Search Area</button>
+      </div>
+    </ng-template>
+  </div>
+</ng-container>

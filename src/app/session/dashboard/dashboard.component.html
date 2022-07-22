@@ -1,0 +1,40 @@
+<button mat-icon-button class="bb" (click)="close()"><mat-icon>arrow_back_ios_new</mat-icon></button>
+<div class="toolbar">
+  Matches
+</div>
+<div class="places">
+  <div class="place" *ngFor="let place of places">
+    <div class="row">
+      <img class="pimg" [src]="place.logoUrl" onerror="src = './assets/store.jpeg'">
+      <div class="col">
+        <div class="name">{{place.name}}</div>
+        <div class="row">
+          <button mat-icon-button color="primary" (click)="nav(place)"><mat-icon>directions</mat-icon></button>
+          <button mat-icon-button color="primary" (click)="launch(place)"><mat-icon>launch</mat-icon></button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row bar-row">
+      <div class="count">{{place.yes}}</div>
+      <div class="bar">
+        <div class="likes" [style.width]="getWidth(place, 'yes')"></div>
+        <div class="nos"  [style.width]="getWidth(place, 'no')"></div>
+      </div>
+      <div class="count">{{place.no}}</div>
+    </div> -->
+    <div class="deals">
+      <!-- <div class="title" *ngIf="place.deals?.length">Deals:</div> -->
+      <div class="deal" *ngFor="let deal of place.deals">
+        <span>{{deal.name}}
+        <span class="extra">{{deal.extraDetails ? ' - ' + deal.extraDetails : ''}}</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="empty" *ngIf="places?.length == 0">
+    <img class="mi" src="./assets/play.jpeg">
+    <div class="title">
+      You haven't made any matches yet..<br><br>
+      Get back to swiping, and we'll let you know as soon as we find a match!
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+.toolbar {
+  position: relative;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
+}
+.bb {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  z-index: 100;
+}
+.title {
+  text-align: center;
+  font-size: 18px;
+  margin: 40px auto 24px;
+  width: 800px;
+  max-width: 80vw;
+  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
+}
+.places {
+  .place {
+    margin: 40px auto;
+    .pimg {
+      height: 100px;
+      width: 100px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-right: 12px;
+    }
+    .name {
+      margin-bottom: 8px;
+      font-size: 23px;
+      font-weight: 500;
+    }
+  }
+}
+.mi {
+  height: 200px;
+  max-width: 60vw;
+  object-fit: cover;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+.bar-row {
+  justify-content: center;
+  margin: 24px auto;
+  .bar {
+    position: relative;
+    height: 24px;
+    border-radius: 24px;
+    border: 2px solid #e0e0e0;
+    overflow: hidden;
+    width: 600px;
+    max-width: calc(100vw - 16px);
+    .likes {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #003452;
+    }
+    .nos {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background-color: #FF6A7B;
+    }
+  }
+  .count {
+    margin: 0 4px;
+    font-size: 17px;
+    font-style: italic;
+    opacity: .87;
+  }
+}
+.deal {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin: 8px 0;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
+  .extra {
+    font-size: 13px;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+.empty {
+  text-align: center;
+  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
+}

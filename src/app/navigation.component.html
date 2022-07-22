@@ -1,0 +1,57 @@
+<div id="links">
+  <button
+      mat-button
+      class="sheet-link"
+      (click)="close('products')"
+      routerLinkActive="tactive"
+  >
+      Products
+  </button>
+  <button
+      mat-button
+      class="sheet-link"
+      (click)="close('instructions')"
+      routerLinkActive="tactive"
+  >
+      Instructions
+  </button>
+
+  <button
+      mat-button
+      class="sheet-link"
+      (click)="close('book-preview')"
+      routerLinkActive="tactive"
+  >
+      See the Pages
+  </button>
+  <button
+      mat-button
+      class="sheet-link"
+      (click)="close('reviews')"
+      routerLinkActive="tactive"
+  >
+      Reviews
+  </button>
+  <button
+      mat-button
+      class="sheet-link"
+      (click)="close('signup')"
+      routerLinkActive="tactive"
+  >
+      {{ loggedIn ? "Account" : "Sign In" }}
+  </button>
+  <button
+      mat-icon-button
+      (click)="close('faq')"
+      aria-label="Route to common questions page"
+  >
+      <mat-icon>help_outline</mat-icon>
+  </button>
+  <button
+      mat-icon-button
+      (click)="close('cart')"
+      aria-label="Route to cart"
+  >
+      <mat-icon>shopping_cart</mat-icon>
+  </button>
+</div>

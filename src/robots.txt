@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://swipe-for.com/sitemap.xml

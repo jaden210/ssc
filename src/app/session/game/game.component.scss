@@ -1,0 +1,144 @@
+.center {
+  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+  .title {
+    font-size: 24px;
+    margin: 24px 0;
+  }
+  .info {
+    margin-bottom: 12px;
+    color: #666666;
+  }
+  mat-form-field {
+    min-width: 250px;
+
+  }
+  .divider {
+    margin: 24px;
+  }
+  .spacer {
+    height: 40px;
+  }
+}
+.mi {
+  height: 200px;
+  max-width: 60vw;
+  object-fit: cover;
+}
+
+.window {
+  height: calc(100vh - 172px);
+  position: relative;
+  overflow: hidden;
+  margin: -8px;
+  .card {
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    position: absolute;
+    .inner-card {
+      background-color: white;
+      height: 100%;
+      border-radius: 12px;
+      transition: all 250ms;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      .ci {
+        flex: 1;
+        max-height: 80%;
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+      .cont {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding: 12px;
+        box-sizing: border-box;
+        .name {
+          font-size: 21px;
+          color: #212121;
+        }
+      }
+    }
+  }
+}
+.mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  // border-top: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    margin: 8px;
+    transition: all 250ms;
+  }
+  .big {
+    height: 64px;
+    width: 64px;
+  }
+  .mini {
+    background-color: #FFFFFF !important;
+    border: 2px solid #003452;
+    color: #003452 !important;
+    border-radius: 40px;
+  }
+  .ro {
+    background-color: #FFFFFF;
+    color: #FF6A7B;
+    border: 2px solid #FF6A7B;
+  }
+  .red {
+    transform: scale(1.25);
+    background-color: #FF6A7B !important;
+    color: #FFFFFF !important;
+  }
+  .go {
+    background-color: #FFFFFF;
+    color: #003452;
+    border: 2px solid #003452;
+  }
+  .green {
+    transform: scale(1.25);
+    background-color: #003452 !important;
+    color: #FFFFFF !important;
+  }
+}
+.w-b {
+  min-width: 150px !important;
+  margin-top: 12px !important;
+}
+.info {
+  width: calc(100vw - 24px);
+  max-width: 900px;
+  font-size: 19px;
+}
+.deal {
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin: 4px 8px;
+  font-size: 12px;
+  background: #FF8F9B;;
+}
+.space {
+  height: 80px;
+}
+.ab {
+  height: 64px;
+  width: 80%;
+}

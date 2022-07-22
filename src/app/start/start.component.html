@@ -1,0 +1,129 @@
+<div class="window" id="scrollwindow" [ngSwitch]="view">
+  <div class="view center" *ngSwitchCase="'splash'" @fadeIn>
+    <img class="mi" src="./assets/ssc.png">
+    <div class="title">The best way to get out together</div>
+  </div>
+  <div class="view top" *ngSwitchCase="'start'" @fadeIn>
+    <div class="title">
+      <img class="bgi" src="./assets/group.jpeg">
+      When you can't all agree on where to go, Staving Student is here to help.<br><br>
+      1. Set a destination<br>
+      2. Choose a Category<br>
+      3. Share with others<br>
+      4. Have a great time<br><br>
+    </div>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" (click)="getName()">Sounds Easy!</button>
+    <div class="code" (click)="view = 'code'">I have a Join Code</div>
+  </div>
+  <div class="view top" *ngSwitchCase="'code'" @fadeIn>
+    <div class="title">Looking to join a game?<br> Enter your 4 digit join code</div>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="join code" [(ngModel)]="joinCode">
+    </mat-form-field>
+    <div class="error">{{joinCodeError}}</div>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" [disabled]="!joinCode || joinCode.length < 4" (click)="navByJoinCode()">Join</button>
+    <button mat-button class="ab" color="primary" (click)="view = 'start'">Go Back</button>
+  </div>
+  <div class="view top" *ngSwitchCase="'name'" @fadeIn>
+    <div class="title">Looks like we haven't offically met, What's your name?</div>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="name" [(ngModel)]="user.name">
+    </mat-form-field>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" [disabled]="!user.name" (click)="setName()">Next</button>
+  </div>
+  <div class="view top" *ngSwitchCase="'location'" @fadeIn>
+    <div class="title">Where are you at?</div>
+    <button mat-raised-button color="primary" class="round-btn" (click)="getCurrentLocation()"><mat-icon>location_on</mat-icon> {{!session.lat ? 'Get my Location' : 'All Set!'}}</button>
+    <div class="info">...or...</div>
+    <mat-form-field appearance="fill">
+      <mat-label>Select an Area</mat-label>
+      <mat-select (selectionChange)="setArea($event)">
+        <mat-option *ngFor="let area of Areas" [value]="area">
+          {{area.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="info">set a distance you're willing to travel</div>
+    <mat-slider
+    class="slider"
+    thumbLabel
+    [displayWith]="formatLabel"
+    tickInterval="5"
+    step="5"
+    [(ngModel)]="session.distance"
+    min="0"
+    max="50"
+    aria-label="units"></mat-slider>
+    <div class="info">{{session.distance}} miles</div>
+      <div class="space"></div>
+      <button mat-raised-button class="ab" color="primary" [disabled]="!session.lat || !session.long" (click)="view = 'category'; scrollUp();">Sweet</button>
+  </div>
+  <div class="view top" *ngSwitchCase="'category'" @fadeIn>
+    <div class="title">What kind of Activity<br> are you looking to do?</div>
+    <div class="categories">
+      <div class="category" *ngFor="let category of Categories" (click)="setCategory(category.id)">
+        <img class="ci" [src]="category.imageUrl">
+        <div class="cn">{{category.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="view center" *ngSwitchCase="'loading'" @fadeIn>
+    <div class="title">Hold on,<br> we're getting everything ready for you...</div>
+  </div>
+  <div class="view top" *ngSwitchCase="'share'" @fadeIn>
+    <div class="title">Invite others to the game!</div>
+    <div class="info">scan the code:</div>
+    <div class="qr">
+      <qrcode-svg
+      class="qr"
+      color="#003452"
+      [value]="SessionUrl"
+      [margin]="'2'"
+      ></qrcode-svg>
+    </div>
+    <div class="space"></div>
+    <div class="info">..or text a link</div>
+    <div class="share-code">
+      <div style="flex:1; text-align: center;">{{session?.shareCode}}</div>
+      <button mat-icon-button color="primary" (click)="share()"><mat-icon>share</mat-icon></button>
+    </div>
+    <div class="space"></div>
+    <button mat-raised-button class="ab" color="primary" (click)="start()">Let's Play!!</button>
+  </div>
+  <div class="view top" *ngSwitchCase="'join'" @fadeIn>
+    <div class="title">The best way to get out together</div>
+  </div>
+</div>
+<div class="loading" *ngIf="loading" @fadeIn>
+  <mat-spinner color="warn" diameter="76"></mat-spinner>
+</div>
+<!-- <div class="center" *ngIf="createSession; else create">
+  <img class="mi" [src]="location?.imageUrl" @fadeIn>
+  <div class="title">Welcome to Swipe For {{location?.name}}!</div>
+  <div class="info">Start a new session or enter the 4 digit join code.</div>
+  <div class="spacer"></div>
+  <button mat-raised-button color="primary" (click)="start()">Start a new Session</button>
+  <div class="divider">-- or --</div>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="4-digit code" id="jc" [(ngModel)]="joinCode">
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="!joinCode || joinCode.length != 4" (click)="findSession()">JOIN</button>
+</div>
+<ng-template #create>
+  <div class="center" *ngIf="user.id; else getInfo;">
+  </div>
+  <ng-template #getInfo>
+    <div class="center" @fadeIn>
+      <img class="mi" [src]="location?.imageUrl">
+      <div class="title">The best way to get out together</div>
+      <div class="info">Enter your name to get started.</div>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="name" [(ngModel)]="user.name">
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!user.name" (click)="createUserAndStartCreateSession()">Start!</button>
+    </div>
+  </ng-template>
+</ng-template> -->

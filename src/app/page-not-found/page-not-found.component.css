@@ -1,0 +1,30 @@
+.body {
+  padding-top: 96px;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  height: 60vh;
+}
+
+#text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 8px;
+}
+
+#cont {
+  max-width: 960px;
+  height: calc(100vh - 112px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+button {
+  margin-bottom: 24px;
+}
