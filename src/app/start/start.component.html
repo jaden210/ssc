@@ -4,13 +4,16 @@
     <div class="title">The best way to get out together</div>
   </div>
   <div class="view top" *ngSwitchCase="'start'" @fadeIn>
+    <img class="bgi" src="./assets/group2.jpeg">
     <div class="title">
-      <img class="bgi" src="./assets/group.jpeg">
       When you can't all agree on where to go, Staving Student is here to help.<br><br>
-      1. Set a destination<br>
-      2. Choose a Category<br>
-      3. Share with others<br>
-      4. Have a great time<br><br>
+      <ol>
+        <li>Set a destination</li>
+        <li>Choose a Category</li>
+        <li>Share with others</li>
+        <li>Have a great time</li>
+      </ol>
+      <br><br>
     </div>
     <div class="space"></div>
     <button mat-raised-button class="ab" color="primary" (click)="getName()">Sounds Easy!</button>

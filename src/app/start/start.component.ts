@@ -2,8 +2,9 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { Router, ActivatedRoute } from "@angular/router";
-import { AppService, Session, User } from "../app.service";
+import { AppService, User } from "../app.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Session } from "../session/session.service";
 
 @Component({
   selector: "start",

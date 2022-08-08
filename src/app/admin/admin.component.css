@@ -1,0 +1,231 @@
+mat-sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.mat-sidenav {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  color: #7986cb;
+  height: 100%;
+}
+
+mat-sidenav-content {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.logo.zeitung {
+  padding: 18px 18px 32px;
+  font-size: 21px;
+  color: #212121;
+}
+
+.selected {
+  background-color: rgba(121,134,203, .45);
+}
+
+.sn-icon {
+  margin: 0 32px 0 8px;
+}
+
+.sn-img {
+  margin: 0 32px 0 8px;
+  height: 24px;
+}
+
+.bar {
+  height: 1px;
+  width: 100%;
+  background-color: #dadce0;
+  margin: 24px 0;
+}
+
+.side-button {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 250ms;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+#left:hover .appear {
+  opacity: 1 !important;
+  transition: opacity 250ms ease-in 500ms;
+}
+
+.appear {
+  opacity: 1;
+  transition: opacity 250ms ease-out 0ms;
+}
+
+.side-button:hover {
+  background-color: #01ADEE;
+}
+
+#body {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 24px;
+  border-top-right-radius: 35px;
+  border-bottom-right-radius: 35px;
+  font-weight: 500;
+}
+
+a:hover {
+  background-color: #f1f3f4 !important;
+}
+
+#content {
+  flex: 1;
+  padding-right: 32px;
+}
+
+.mat-list-item {
+  color: #3c4043;
+}
+
+#name {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+#footer {
+  padding: 12px;
+  font-size: 24px;
+  /*border-top: 1px solid rgba(0,0,0,.14);*/
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+#mlogo {
+  height: 40px;
+}
+
+.fi {
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+#d-content {
+  padding-bottom: 24px;
+}
+
+.team {
+  cursor: pointer;
+  padding: 12px;
+}
+
+.account-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+}
+
+.account-popup {
+  position: absolute;
+  top: 62px;
+  background-color: #ffffff;
+  left: 12px;
+  min-width: 260px;
+  height: 350px;
+  z-index: 21;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 2px -2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.profile-popup {
+  position: absolute;
+  top: 62px;
+  background-color: #ffffff;
+  right: 12px;
+  width: 340px;
+  height: 130px;
+  z-index: 21;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 2px -2px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+
+.row {
+  margin-bottom: 12px;
+}
+
+
+.pr {
+  display: flex;
+  height: 100%;
+}
+
+#pi {
+  height: 96px;
+  border-radius: 50%;
+  width: 96px;
+  object-fit: cover;
+  align-self: center;
+}
+
+.col {
+  margin-left: 12px;
+}
+
+#pn {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#pe {
+  font-size: 15px;
+  opacity: 0.67;
+  margin-bottom: 20px;
+}
+
+
+@media screen and (max-width: 1000px) {
+ #left {
+   display: none;
+ }
+ #body {
+   width: 100vw;
+ }
+
+}

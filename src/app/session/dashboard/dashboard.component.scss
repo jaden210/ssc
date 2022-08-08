@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   height: 54px;
-  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
 }
 .bb {
   position: absolute;
@@ -19,11 +18,12 @@
   margin: 40px auto 24px;
   width: 800px;
   max-width: 80vw;
-  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
 }
 .places {
+  margin: 8px;
   .place {
     margin: 40px auto;
+    max-width: 600px;
     .pimg {
       height: 100px;
       width: 100px;
@@ -36,6 +36,11 @@
       font-size: 23px;
       font-weight: 500;
     }
+  }
+  .winner {
+    border: 2px solid gold;
+    border-radius: 12px;
+    padding: 8px;
   }
 }
 .mi {
@@ -91,7 +96,6 @@
   padding: 8px 12px;
   box-sizing: border-box;
   background: #f7f7f7;
-  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
   .extra {
     font-size: 13px;
     font-style: italic;
@@ -100,5 +104,4 @@
 }
 .empty {
   text-align: center;
-  font-family: "Edu NSW ACT Foundation", Nunito, Roboto, Helvetica Neue, sans-serif;
 }

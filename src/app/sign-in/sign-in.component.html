@@ -1,0 +1,63 @@
+<div class="content">
+  <div class="card">
+    <div class="title">
+      <img src="/assets/ssc.png" />
+    </div>
+    <form (ngSubmit)="signIn()" [formGroup]="form">
+      <mat-form-field floatLabel="never" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          class="ro-input"
+          matInput
+          autocomplete="email"
+          formControlName="email"
+          (blur)="trim('email')"
+        />
+        <mat-error *ngIf="form.get('email').errors?.email" align="end"
+          >Incorrect email format</mat-error
+        >
+        <mat-error *ngIf="form.get('email').errors?.required" align="end"
+          >Email required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field floatLabel="never" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          class="ro-input"
+          matInput
+          autocomplete="new-password"
+          formControlName="password"
+          [type]="hide ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="togglePassword($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error align="end" *ngIf="form.get('password').errors?.minlength"
+          >Password must be at least 6 characters</mat-error
+        >
+        <mat-error *ngIf="form.get('password').errors?.required" align="end"
+          >Password required</mat-error
+        >
+      </mat-form-field>
+      <p *ngIf="error" class="error">{{ error }}</p>
+
+      <button class="create" mat-flat-button color="warn" type="submit">
+        Sign In
+      </button>
+
+      <!-- <a class="sign-in" [routerLink]="'/sign-in'">Sign in instead</a> -->
+      <!-- <a (click)="signInWithGoogle()">Sign in with Google</a> -->
+    </form>
+
+  </div>
+
+  <div class="mobile-spacer"></div>
+</div>
+
+<footer></footer>

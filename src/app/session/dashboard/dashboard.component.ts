@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, Inject } from "@angular/core";
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from "@angular/material/bottom-sheet";
 import { Router } from "@angular/router";
-import { Session } from "src/app/app.service";
-import { Place, SessionService, Vote } from "../session.service";
+import { Place, Session, SessionService, Vote } from "../session.service";
 
 @Component({
   selector: "dashboard",
@@ -14,7 +13,7 @@ import { Place, SessionService, Vote } from "../session.service";
 })
 export class DashboardComponent {
 
-  public places: Place[] = [];
+  public places: Place[];
   public session: Session;
   public votes: Vote[] = [];
 
@@ -31,7 +30,7 @@ export class DashboardComponent {
         p.yes = this.votes.filter(v => (v.placeId == p.id) && v.vote).length || 0;
         p.no = this.votes.filter(v => (v.placeId == p.id) && !v.vote).length || 0;
       });
-      this.places = this.places.filter(p => p.yes == this.session.users.length).sort((a,b) => a.yes > b.yes ? -1 : 1);
+      this.places = this.places.filter(p => p.yes == this.session.users.length).sort((a, b) => +(b.id == this.WinningPlaceId) - +(a.id == this.WinningPlaceId) || (a.yes > b.yes ? -1 : 1));
     })
   }
 
@@ -41,6 +40,10 @@ export class DashboardComponent {
 
   public getWidth(place: Place, key: string): string {
     return `${(place[key] / this.session.users.length)*100}%`;
+  }
+
+  public get WinningPlaceId(): string {
+    return this.session.winningPlaceId;
   }
 
   close(): void {
@@ -59,6 +62,11 @@ export class DashboardComponent {
       }
     })
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.long}`, '_blank');
+  }
+
+  public setWinner(place: Place): void {
+    this.session.winningPlaceId = place.id;
+    this._ss.updateSession(this.session);
   }
 
   public launch(place: Place) {

@@ -16,12 +16,14 @@ import { AppRoutingModule } from "./app-routing.module";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { Router } from "@angular/router";
 import { StartComponent } from "./start/start.component";
+import { SignInComponent } from "./sign-in/sign-in.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    StartComponent
+    StartComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

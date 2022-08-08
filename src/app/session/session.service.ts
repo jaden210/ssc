@@ -6,6 +6,7 @@ import "firebase/auth";
 import { BehaviorSubject, Observable } from "rxjs";
 import * as firebase from 'firebase/compat/app';
 import { map } from "rxjs/operators";
+import { User } from "../app.service";
 
 @Injectable()
 export class SessionService {
@@ -65,6 +66,10 @@ export class SessionService {
 
   public getPlaces(): Observable<Deal[]> {
     return this._db.collection<Deal>('deals').valueChanges({idField: "id"});
+  }
+
+  public getWins(): Observable<Session[]> {
+    return this._db.collection<Session>('sessions').valueChanges({idField: "id"});
   }
 
   public getSessionUsers(userIds: string[]): Observable<User[]> {
@@ -129,13 +134,6 @@ export class SessionService {
 
 
 
-export class User {
-  id?: string;
-  name: string;
-  email?: string;
-  phone?: string;
-}
-
 export class Session {
   id?: string;
   userId: string;
@@ -147,6 +145,7 @@ export class Session {
   lat;
   long;
   distance: number = 25;
+  winningPlaceId: string;
 }
 
 export class Location {
@@ -168,7 +167,6 @@ export class Place {
   name: string;
   logoUrl: string;
   address: string;
-  hourse: string;
   latitude: number;
   longitude: number;
   locations: any;
@@ -178,14 +176,14 @@ export class Place {
 }
 
 export class Deal {
-  id;
-  businessName;
-  businessId;
-  maxUses;
-  extraDetails;
-  deal;
-  imageUrl;
-  categoryId;
-  locations;
-  sscId;
+  id: string;
+  businessName: string;
+  businessId: string;
+  maxUses: number;
+  extraDetails: string;
+  deal: string;
+  imageUrl: string;
+  categoryId: number;
+  locations: any[];
+  sscId: string;
 }

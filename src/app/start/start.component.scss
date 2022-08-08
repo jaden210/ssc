@@ -26,7 +26,7 @@
 
 .bgi {
   width: 90%;
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
 }
 .code {
   margin-top: 12px;
@@ -34,6 +34,12 @@
   font-weight: bold;
   text-decoration: underline;
   font-size: 17px;
+}
+
+ol {
+  margin: auto;
+  text-align: left;
+  width: 250px;
 }
 
 .category {
@@ -87,6 +93,9 @@ mat-form-field {
 }
 .ab {
   height: 64px;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
 }
 .round-btn {
   border-radius: 24px;

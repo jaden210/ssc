@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-  font-family: "Proxima Nova Thin", "Nunito", "Roboto", "Helvetica Neue",
-    "lato" sans-serif;
+  font-family: "Edu NSW ACT Foundation", "Nunito", "Roboto", "Helvetica Neue",
+    "lato", sans-serif;
 }
 
 .mat-drawer-backdrop.ng-star-inserted.mat-drawer-shown {
@@ -11,6 +11,12 @@
 
 .flex {
   flex: 1;
+}
+
+button {
+  span {
+    font-family: "Nunito" !important;
+  }
 }
 
 .memorial-background {
@@ -350,10 +356,6 @@ textarea.mat-input-element {
   .b-text {
     font-size: 16px;
   }
-}
-
-* {
-  font-family: "Nunito", sans-serif;
 }
 
 .mobile {

@@ -4,8 +4,8 @@ import { trigger, transition, style, animate, state } from "@angular/animations"
 import { Router, ActivatedRoute } from "@angular/router";
 import { combineLatest, skip, skipWhile } from "rxjs";
 import * as moment from "moment";
-import { AppService, Session, User } from "src/app/app.service";
-import { Place, SessionService, Vote } from "../session.service";
+import { AppService, User } from "src/app/app.service";
+import { Place, Session, SessionService, Vote } from "../session.service";
 
 @Component({
   selector: "game",
@@ -58,7 +58,6 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this._ss.dataObservable.pipe(skipWhile(o => o[2] == null)).subscribe(([session, votes, deals, user]) => {
-      console.log(session);
       this.deals = deals;
       this.session = session;
       this.votes = votes;
@@ -68,7 +67,7 @@ export class GameComponent implements OnInit, AfterViewInit {
         this.view = 'bad';
         return;
       }
-      if (moment(session.createdAt.toDate()).diff(moment(), "d") > 0) {
+      if (moment(session.createdAt.toDate()).diff(moment(), "d") < 0) {
         this.view = "over";
         return;
       }
@@ -76,7 +75,8 @@ export class GameComponent implements OnInit, AfterViewInit {
         this.joinView();
       } else {
         if (this.places.length == 0) {
-          this.buildPlaces();
+          this.places = this._ss.places; 
+          if (this.Matches > 0) this.showMatchCard = true;
         }
         this.sortAlgorithm();
         setTimeout(() => {
@@ -84,26 +84,6 @@ export class GameComponent implements OnInit, AfterViewInit {
         }, 500);
       }
     });
-  }
-
-  private buildPlaces(): void {
-    this.places = this.deals.reduce((acc, d) => {
-      let key = d['businessId'];
-      if (!acc.find(a => a.id == key)) {
-        acc.push({
-          id: d.businessId,
-          name: d.businessName,
-          logoUrl: d.imageUrl,
-          locations: d.locations,
-          sscId: d.id,
-          categoryId: d.categoryId,
-          deals: []
-        });
-      }
-      acc.find(a => a.id == key).deals.push({id: d.id, name: d.deal, extraDetails: d.extraDetails, maxUses: d.maxUses})
-      return acc;
-    }, []);
-    if (this.Matches > 0) this.showMatchCard = true;
   }
 
   private joinView(): void {
@@ -137,7 +117,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   private joinGame(): void {
     this.session.users.push(this.user.id);
     this._ss.updateSession(this.session).then(() => {
-      this.buildPlaces();
+      this.places = this._ss.places;
       this.sortAlgorithm();
       setTimeout(() => {
         this.view = 'game';
@@ -206,13 +186,15 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   private sortAlgorithm(): void { //magic man
     this.filteredPlaces = this.places.filter(p => {
+      console.log(p.wins);
+      
       return !this.votes.find(v => v.placeId == p.id && v.userId == this.user.id) &&
       this._as.categories.find(c => c.id == this.session.categoryId).categoryIds.find(c => c == p.categoryId) &&
       p.locations.some(l => this.getDistanceFromLatLonInKm(this.session.lat, this.session.long, l.lat, l.long) <= 40)
     })
-    .sort((a,b) => a.name.localeCompare(b.name))
+    .sort((a,b) => b.wins - a.wins || (a.name.localeCompare(b.name)))
     .splice(0,2)
-    .sort((a,b) => b.name.localeCompare(a.name));
+    .sort((a,b) => a.wins - b.wins || (b.name.localeCompare(a.name)))
   }
 
   private getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {

@@ -6,7 +6,7 @@ import { Location } from "@angular/common";
 import { environment } from "src/environments/environment";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppService } from "../app.service";
-import { SessionService } from "./session.service";
+import { Session, SessionService } from "./session.service";
 
 @Component({
   selector: "app-session",
@@ -33,19 +33,21 @@ export class SessionComponent implements OnInit {
         this._ss.getSessionById(sessionId),
         this._ss.getVotesBySessionId(sessionId),
         this._ss.getPlaces(),
-        this._ss.getUserById(this._ss.user.id || userId)
-      ]).subscribe(([session, votes, deals, user]) => {
+        this._ss.getUserById(this._ss.user.id || userId),
+        this._ss.getWins()
+      ]).subscribe(([session, votes, deals, user, wins]) => {
         user.id = this._ss.user.id || userId;
+        session.id = sessionId;
         this._ss.dataObject = [session, votes, deals, user];
-        this._ss.dataObservable.next([session, votes, deals, user]);
         if (this._ss.places.length == 0) {
-          this.buildPlaces();
+          this.buildPlaces(wins);
         }
+        this._ss.dataObservable.next([session, votes, deals, user]);
       });
     });
   }
 
-  private buildPlaces(): void {
+  private buildPlaces(wins: Session[]): void {
     this._ss.places = this._ss.dataObject[2].reduce((acc, d) => {
       let key = d['businessId'];
       if (!acc.find(a => a.id == key)) {
@@ -56,7 +58,8 @@ export class SessionComponent implements OnInit {
           locations: d.locations,
           sscId: d.id,
           categoryId: d.categoryId,
-          deals: []
+          deals: [],
+          wins: wins.filter(s => s.winningPlaceId == d.businessId).length || 0
         });
       }
       acc.find(a => a.id == key).deals.push({id: d.id, name: d.deal, extraDetails: d.extraDetails, maxUses: d.maxUses})

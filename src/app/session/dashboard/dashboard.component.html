@@ -3,16 +3,17 @@
   Matches
 </div>
 <div class="places">
-  <div class="place" *ngFor="let place of places">
+  <div class="place" *ngFor="let place of places" [class.winner]="WinningPlaceId == place.id">
     <div class="row">
       <img class="pimg" [src]="place.logoUrl" onerror="src = './assets/store.jpeg'">
       <div class="col">
         <div class="name">{{place.name}}</div>
-        <div class="row">
-          <button mat-icon-button color="primary" (click)="nav(place)"><mat-icon>directions</mat-icon></button>
-          <button mat-icon-button color="primary" (click)="launch(place)"><mat-icon>launch</mat-icon></button>
-        </div>
       </div>
+    </div>
+    <div class="row">
+      <button mat-icon-button color="primary" (click)="nav(place)"><mat-icon>directions</mat-icon></button>
+      <button mat-icon-button color="primary" (click)="launch(place)"><mat-icon>launch</mat-icon></button>
+      <button mat-raised-button color="primary" *ngIf="!WinningPlaceId" (click)="setWinner(place)"><mat-icon>thumb_up</mat-icon> Set as Destination</button>
     </div>
     <!-- <div class="row bar-row">
       <div class="count">{{place.yes}}</div>
@@ -30,7 +31,7 @@
       </div>
     </div>
   </div>
-  <div class="empty" *ngIf="places?.length == 0">
+  <div class="empty" *ngIf="places && places.length == 0">
     <img class="mi" src="./assets/play.jpeg">
     <div class="title">
       You haven't made any matches yet..<br><br>

@@ -3,8 +3,8 @@ import { Component, Inject } from "@angular/core";
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA } from "@angular/material/bottom-sheet";
 import { Router } from "@angular/router";
 import { skip, skipWhile } from "rxjs";
-import { AppService, Session, User } from "src/app/app.service";
-import { SessionService } from "../session.service";
+import { AppService, User } from "src/app/app.service";
+import { Session, SessionService } from "../session.service";
 
 @Component({
   selector: "share-sheet",

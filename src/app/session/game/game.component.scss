@@ -54,6 +54,9 @@
         object-position: center;
       }
       .cont {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: start;
@@ -62,6 +65,7 @@
         .name {
           font-size: 21px;
           color: #212121;
+          font-family: "Nunito" !important;
         }
       }
     }

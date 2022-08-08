@@ -46,9 +46,9 @@
             <img class="ci" [src]="place.logoUrl" onerror="src = './assets/store.jpeg'">
             <div class="cont">
               <div class="name">{{place.name}}</div>
-              <ng-container *ngFor="let deal of place.deals; let ind = index">
+              <!-- <ng-container *ngFor="let deal of place.deals; let ind = index">
                 <div class="deal" *ngIf="ind < 2">{{deal.name}}</div>
-              </ng-container>
+              </ng-container> -->
               <!-- <div class="deal" *ngIf="place.deals.length > 2">+ {{place.deals.length - 2}} more!</div> -->
             </div>
         </div>

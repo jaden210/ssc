@@ -5,6 +5,7 @@ import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { DOCUMENT } from "@angular/common";
 import { AngularFireFunctions } from "@angular/fire/compat/functions";
 import { Observable } from "rxjs";
+import { Session } from "./session/session.service";
 
 @Injectable({
   providedIn: "root",
@@ -104,17 +105,5 @@ export class User {
   name: string;
   email?: string;
   phone?: string;
-}
-
-export class Session {
-  id?: string;
-  userId: string;
-  categoryId: number;
   createdAt: any = new Date();
-  shareCode: string;
-  users: string[] = [];
-  places: any[] = [];
-  lat;
-  long;
-  distance: number = 25;
 }
